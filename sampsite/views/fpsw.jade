@@ -1,0 +1,49 @@
+extends layout
+block content
+    script.
+      //Function alerts user id email isn't filled after submit is pressed
+      function validateForm() {
+        var yy = document.forms["myForm"]["email"].value;
+        if (yy == null || yy== "") {
+          window.alert("Your email must be filled out");
+          document.forms["myForm"]["email"].focus();
+          return false;
+        }
+        
+        var atpos = yy.indexOf("@");
+        var dotpos = yy.lastIndexOf(".");
+        if (atpos < 1 || ( dotpos - atpos < 2 )) {
+          window.alert("Please enter correct email ID");
+          return false;
+        }
+
+      }
+
+    // Creates nav bar with just company logo
+    nav.navbar.navbar-custom.navbar-fixed-top.center(width='600px')
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='./') SimBiss
+
+
+
+          
+    // Log in panel with spots fot email and password
+    br
+    br
+    br
+    br
+    .container
+      .panel.panel-default.responsive.panel-body(text-align='center')
+        h1 Forgot Password
+        form(name='myForm', onsubmit='return validateForm()', method='get', action='/psw')
+          | Email 
+          br
+          input#email.box(type='text', name='email', maxlength='55')
+          br
+          br
+          input#submit(type='submit', value='Submit')
+          br  
+          br
+        br
+

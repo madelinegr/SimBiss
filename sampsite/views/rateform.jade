@@ -1,0 +1,59 @@
+extends layout
+block content
+    // Creates navbar
+    nav.navbar.navbar-custom.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          a.navbar-brand.black(href='#')
+            b SimBiss
+        ul.nav.navbar-nav
+          li
+            a(href='/1')
+              img(src='/images/glyphicons-28-search.png')
+          li
+            a(href='/2')
+              img(src='/images/glyphicons-21-home.png')
+          li
+            a(href='/3')
+              img(src='/images/glyphicons-31-pencil.png')
+          li
+            a(href='/4')
+              img(src='/images/glyphicons-246-chat.png')
+          li.active.activen
+            a(href='/5')
+              img(src='/images/glyphicons-4-user.png')
+        ul.nav.navbar-nav.navbar-right()
+          li
+            a(href='./') Log Out
+         
+    br
+    br
+    br
+
+    each user, i in users
+        if user.email == email
+            h1 Review #{user.fname}
+            br
+            // Form for user to input info
+            form#form_add_usr(role='form', name='form', method='post', action='/addreview?email=#{user.email}')
+                .form-group
+                     span(for='rate') Rate #{user.fname} (1 through 5):
+                     span &nbsp;
+                     br
+                     select#rate(required='', name='rate')
+                        option 1
+                        option 2
+                        option 3
+                        option 4
+                        option 5
+                        br
+                    span(for='comment') Comment:
+                    br
+                    span &nbsp;
+                    textarea#comment(name='comment', rows='10', cols='30', required='', placeholder='Write about his/her skills and personality.')
+                    br
+                    br
+                input#submit(type='submit', value='Submit')
+                br
+                br
+

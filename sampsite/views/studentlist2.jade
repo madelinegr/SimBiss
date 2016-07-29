@@ -1,0 +1,6 @@
+extends layout
+block content
+	ul
+		each user, i in studentlist2	
+			li#student_list_item
+				a(href='#') #{user.fname}

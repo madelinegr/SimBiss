@@ -1,0 +1,107 @@
+extends layout
+block content
+    // Nav bar
+    nav.navbar.navbar-custom.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='#')
+            b SimBiss
+        ul.nav.navbar-nav
+          li.active.activen
+            a(href='#')
+              img(src='/images/glyphicons-28-search.png')
+          li
+            a(href='/2')
+              img(src='/images/glyphicons-21-home.png')
+          li
+            a(href='/3')
+              img(src='/images/glyphicons-31-pencil.png')
+          li
+            a(href='/4') 
+              img(src='/images/glyphicons-246-chat.png')
+          li
+            a(href='/5')
+              img(src='/images/glyphicons-4-user.png')
+        ul.nav.navbar-nav.navbar-right()
+          li
+            a(href='./') Log Out
+    br
+    br
+    br
+    form#form_search(role='form', name='search', method='get', action='/searchsubmit')
+      input.search1.search2(type='text', name='searchword', placeholder='Search')
+      input(type='image', src='/images/glyphicons-28-search.png', alt='Submit')
+    br
+
+    .container
+      ul.nav.nav-tabs
+        li
+          a(data-toggle='tab', href='#people') People
+        li
+          a(data-toggle='tab', href='#posts') Posts
+      br
+      .tab-content
+        #people.tab-pane.fade
+          table.table.table-hover.row(align='center')
+            tbody
+              if users != null
+                each user, i in users
+                  tr
+                    th(scope='row', style='white-space:nowrap; width:1%;')
+                      if user.gender == "female"
+                          img.img-circle(src='https://s-media-cache-ak0.pinimg.com/236x/b3/e1/97/b3e19765b8e71866d2e11e765ac0469a.jpg', width='60', height='60', align='left')
+                      else if user.gender == "male"
+                        img.img-circle(src='http://s5.favim.com/orig/69/adorable-cute-dog-photography-Favim.com-659715.jpg', width='60', height='60', align='left')
+                      else
+                        img.img-circle(src='http://www.acuteaday.com/blog/wp-content/uploads/2013/04/adorable-baby-elephant-spraying-water-out-of-trunk.jpg', width='60', height='60', align='left')
+                    td
+                      a.black(href='/5?email=#{user.email}', style='font-size:20px') #{user.fname} #{user.lname}
+        #posts.tab-pane.fade
+          if posts != null
+            each post in posts
+              .container
+                .panel.panel-default(text-align='left')
+                  .panel-body(align='left')
+                    if users != null
+                      each user in users
+                        if user.email == post.email
+                          if user.gender == "female"
+                            img.img-circle(src='https://s-media-cache-ak0.pinimg.com/236x/b3/e1/97/b3e19765b8e71866d2e11e765ac0469a.jpg', width='100', height='100', align='left')
+                          else if user.gender == "male"
+                            img.img-circle(src='http://s5.favim.com/orig/69/adorable-cute-dog-photography-Favim.com-659715.jpg', width='100', height='100', align='left')
+                          else
+                            img.img-circle(src='http://www.acuteaday.com/blog/wp-content/uploads/2013/04/adorable-baby-elephant-spraying-water-out-of-trunk.jpg', width='100', height='100', align='left')
+                    p
+                      a.button.btn.pull-right(type='button', href='/like?post=#{post._id}')
+                        img(src='/images/glyphicons-13-heart.png')
+                      b Title:
+                      |  #{post.title}
+                      br
+                      b Description:
+                      |  #{post.description}
+                      br
+                      br
+                      b Location:
+                      |  #{post.loc}
+                      br
+                      b People Needed:
+                      |  #{post.pnum}
+                      br
+                      br
+                      -var loop = 0
+                      -if(post.accepted != null )
+                        b Accepted:
+                        -while(loop < post.accepted.length)
+                          each user in users
+                            if user.email == post.accepted[loop]
+                              a.black(href='/5?email=#{user.email}')
+                                p #{user.fname} #{user.lname}
+                          -loop++
+                      a.black(href='/5?email=#{post.email}')
+                        if users != null
+                          each user in users
+                            if user.email == post.email
+                              span.pull-left #{user.fname} #{user.lname}
+                  .panel-footer
+                    b Looking for:
+                    |  #{post.lookingfor}

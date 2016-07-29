@@ -1,0 +1,103 @@
+extends layout
+block content
+
+    script.
+      //Function alerts user id email or psw isn't filled after submit is pressed
+      function validateForm() {
+        var x = document.forms["addusr"]["fname"].value;
+        if (x == null || x == "") {
+          window.alert("Your first name must be filled out");
+          return false;
+        }
+        var y = document.forms["addusr"]["lname"].value;
+        if (y == null || y == "") {
+          window.alert("Your last name must be filled out");
+          return false;
+        }
+        var yy = document.forms["addusr"]["email"].value;
+        if (yy == null || yy== "") {
+          window.alert("Your email must be filled out");
+          return false;
+        }
+        var xx = document.forms["addusr"]["psw"].value;
+        var xx2 = document.forms["addusr"]["psw2"].value;
+        if (xx == null || xx== "" || xx2 == null || xx2== "" ) {
+          window.alert("Your password must be filled out");
+          return false;
+        }
+        
+        var atpos = yy.indexOf("@");
+        var dotpos = yy.lastIndexOf(".");
+        if (atpos < 1 || ( dotpos - atpos < 2 )) {
+          window.alert("Please enter correct email ID");
+          return false;
+        }
+
+        if(xx != xx2){
+          window.alert("Passwords must match");
+          return false;
+        }
+
+        return true; 
+      }
+    // Nav bar
+    nav.navbar.navbar-custom.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='./') SimBiss
+    br
+    br
+    br
+    h1 Sign Up
+    br
+    // Form for user to input info
+    form#form_add_usr(role='form', name='addusr', method='post', onsubmit="return validateForm()", action="/addusr")
+      .form-group
+        span(for='fname') First name:
+        span &nbsp;
+        input#input_fname(type='text', name='fname', maxlength='20', placeholder='enter first name')
+        br
+        br
+        span(for='lname') Last name:
+        span &nbsp;
+        input#input_lname(type='text', name='lname', maxlength='20', placeholder='enter last name')
+        br
+        br
+        span(for='email') Email:
+        span &nbsp;
+        input#input_email(type='email', name='email', placeholder='enter email')
+        br
+        br
+        span(for='gender') Gender:
+        span &nbsp;
+        select#input_gender(required='', name='gender')
+          option male
+          option female
+          option other
+        br
+        br
+        span(for='psw') Password:
+        span &nbsp;
+        input#input_psw(type='password', name='psw', minlength='6', placeholder='enter password')
+        br
+        span(for='psw2') Confirm Password:
+        span &nbsp;
+        input#input_psw2(type='password', name='psw2', minlength='6', placeholder='enter password')
+        br
+        br
+      select#input_secureq(name='secureq', required='')
+        option What street did you grow up on?
+        option What was your high school mascot?
+        option What is your favorite movie?
+        option What is the name of your favorite pet?
+        option What is the name of your first boyfriend/girlfriend?
+        option What was your favorite place to visit as a child?
+        option What is your favorite website?
+      br
+      input#input_answer(type='text', name='securea', maxlength='40', placeholder='enter answer to security question')
+      br
+      br
+      input#submit(type='submit', value='Submit')
+      br
+      br
+

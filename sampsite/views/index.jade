@@ -1,0 +1,46 @@
+extends layout
+
+block content
+	.container
+		.jumbotron
+			h1 SimBiss
+			p
+				| Want to join or start a project?  SimBiss is for you!  We welcome people of all ages and backgrounds to use this site to meet up with others with similar interests to venture into an amazing project.
+		.container
+			#myCarousel.carousel.slide(data-ride='carousel', date-interval='500')
+				// Indicators
+				ol.carousel-indicators
+					li.item1.active
+					li.item2
+					li.item3
+				// Wrapper for slides
+				.carousel-inner(role='listbox')
+					.item.active
+						img.center-block(src='http://spark.ieee.org/files/2014/11/bigstock-Two-colleagues-working-togethe-56632349.jpg', width='600', height='400')
+					.item
+						img.center-block(src='http://img2-3.timeinc.net/toh/i/g/13/home-solutions/08-decode-paint/04-new-paint.jpg', width='600', height='400')
+					.item
+						img.center-block(src='http://previews.123rf.com/images/kzenon/kzenon1410/kzenon141000144/32727195-Asian-professional-singer-and-pianist-working-and-discussing-on-new-song-in-studio-for-composing-and-Stock-Photo.jpg', width='600', height='400')
+		.btn-group.btn-group-lg
+			button.btn.btn-primary(type='button' onclick="blogin()") Log In
+			button.btn.btn-success(type='button' onclick="bsignup()") Sign Up
+	br
+	br
+	br
+	br
+	br
+	br
+	br
+
+	nav.navbar.navbar-custom.navbar-fixed-bottom.center(width='800px')
+		.container-fluid
+			a.navbar.black(href='/contact') Contact Us
+			a.navbar.black(href='/about') About Us
+
+	script.
+		function blogin() {
+			window.location.href = '/login';
+		}
+		function bsignup() {
+			window.location.href = '/signup';
+		}	

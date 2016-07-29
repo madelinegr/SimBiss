@@ -1,0 +1,28 @@
+extends layout
+block content
+
+	nav.navbar.navbar-custom.navbar-fixed-top
+		.container-fluid
+			.navbar-header
+				a.navbar-brand(href="./")
+					b SimBiss
+
+	<br /><br /><br />
+
+	h1 Contact Us
+	h2 Please let us know if you have any questions, feedback, or concerns.  
+
+	form(role='form', name='contact', action='./')
+		| Name:
+		br
+		input(type='text', name='name', required='')
+		<br /><br />
+		| Email:
+		br
+		input(type='email', name='email', required='')
+		<br /><br />
+		| Question/ Feedback:
+		br
+		textarea(type='text', name='question', rows='10', cols'30', required='')
+		<br /><br />
+		input#submit(type='submit', value='Submit')

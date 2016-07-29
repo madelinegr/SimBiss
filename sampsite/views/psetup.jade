@@ -1,0 +1,40 @@
+extends layout
+block content
+
+    script.
+      //Function alerts user if bio isn't filled after submit is pressed
+      function validateForm() {
+        var x = document.forms["biosetup"]["bio"].value;
+        if (x == null || x == "") {
+          window.alert("Your bio name must be filled out");
+          return false;
+        }
+        return true; 
+      }
+    // Nav bar
+    nav.navbar.navbar-custom.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='#') SimBiss
+    br
+    br
+    br
+    h1 Your Profile
+    h3 #{email1} #{bio}
+    br
+    // Form for user to input info
+    form#form_add_usr(role='form', name='biosetup', method='post', onsubmit="return validateForm()", action='/biosetup')
+      .form-group
+        span(for='bio') Bio:
+        br
+        span &nbsp;
+        if bio == null
+          textarea#bio(name='bio', rows='10', cols='40', required='', placeholder='Enter information about your background, skills and interests.')
+        else
+          textarea#bio(name='bio', rows='10', cols='40', required='', placeholder=bio)
+        br
+        br
+      input#submit(type='submit', value='Submit')
+      br
+      br
+

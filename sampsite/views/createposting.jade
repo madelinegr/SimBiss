@@ -1,0 +1,68 @@
+extends layout
+block content
+
+    // This makes the top navigation bar and adds diffrent buttons/logos to the bar
+    nav.navbar.navbar-custom.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='#')
+            b SimBiss
+        ul.nav.navbar-nav
+          li
+            a(href='/1')
+              img(src='/images/glyphicons-28-search.png')
+          li
+            a(href='/2')
+              img(src='/images/glyphicons-21-home.png')
+          li.active.activen
+            a(href='#')
+              img(src='/images/glyphicons-31-pencil.png')
+          li
+            a(href='/4')
+              img(src='/images/glyphicons-246-chat.png')
+          li
+            a(href='/5')
+              img(src='/images/glyphicons-4-user.png')
+        ul.nav.navbar-nav.navbar-right()
+          li
+            a(href='./') Log Out
+    br
+    br
+    br
+    // Page title
+    h1 Create Posting
+    // Form of information needed from user
+    form#form_create_posting(role='form', name='addpost', method='post', onsubmit="return validateForm()")
+      | Title:
+      br
+      input(type='text', name='title', required='', maxlength='50')
+      br
+      br
+      |   Looking for:
+      br
+      input(type='text', name='lookingfor', required='')
+      br
+      br
+      |   Number of People:
+      br
+      input(type='text', name='pnum', required='', maxlength='4')
+      br
+      br
+      |   Payment:
+      br
+      input(type='text', name='payment', placeholder='optional payment')
+      br
+      br
+      |   Location:
+      br
+      input(type='text', name='loc', placeholder='Online or Address/ Area', required='')
+      br
+      br
+      |   *Description:
+      br
+      textarea(name='description', rows='5', cols='30', required='', placeholder='Describe this event and the type of people you are looking for')
+      br
+      br
+      input#submit(type='submit', value='Submit')
+    br
+    br

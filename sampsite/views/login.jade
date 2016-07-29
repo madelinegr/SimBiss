@@ -1,0 +1,63 @@
+extends layout
+block content
+  div.backgroundi
+    head script(src="routes/index.js");
+    script.
+      //Function alerts user id email or psw isn't filled after submit is pressed
+      function validateForm() {
+        var yy = document.forms["myForm"]["email"].value;
+        if (yy == null || yy== "") {
+          window.alert("Your email must be filled out");
+          document.forms["myForm"]["email"].focus();
+          return false;
+        }
+        var xx = document.forms["myForm"]["psw"].value;
+        if (xx == null || xx== "") {
+          window.alert("Your password must be filled out");
+          document.forms["myForm"]["psw"].focus();
+          return false;
+        }
+
+        var atpos = yy.indexOf("@");
+        var dotpos = yy.lastIndexOf(".");
+        if (atpos < 1 || ( dotpos - atpos < 2 )) {
+          window.alert("Please enter correct email ID");
+          return false;
+
+        }
+      }
+
+
+    // Creates nav bar with just company logo
+    nav.navbar.navbar-custom.navbar-fixed-top.center(width='600px')
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='./') SimBiss
+          
+    // Log in panel with spots fot email and password
+    br
+    br
+    br
+    br
+    .container
+      .panel.panel-default.responsive.panel-body(text-align='center')
+        h1 Log In
+        form(name='myForm', onsubmit='return validateForm()', method='post')
+          | Email:
+          br
+          input#email.box(type='text', name='email', maxlength='55')
+          br
+          br
+          |     Password: 
+          br
+          input#psw.box(type='password', name='psw')
+          br
+          br
+          input#submit(type='submit', value='Submit')
+          br
+          a.black.small(href='/fpsw') Forgot password?
+          br
+          a.black.small(href='/signup') Sign Up
+        br
+        br
+

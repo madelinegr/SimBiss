@@ -1,0 +1,61 @@
+extends layout
+block content
+    // Nav bar
+    nav.navbar.navbar-custom.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='#')
+            b SimBiss
+        ul.nav.navbar-nav
+          li
+            a(href='/1')
+              img(src='/images/glyphicons-28-search.png')
+          li
+            a(href='/2')
+              img(src='/images/glyphicons-21-home.png')
+          li
+            a(href='/3')
+              img(src='/images/glyphicons-31-pencil.png')
+          li.active.activen
+            a(href='#')
+              img(src='/images/glyphicons-246-chat.png')
+          li
+            a(href='/5')
+              img(src='/images/glyphicons-4-user.png')
+        ul.nav.navbar-nav.navbar-right()
+          li
+            a(href='./') Log Out
+    br
+    br
+    br
+    h1 Notifications
+    -var havepost = 0
+    table.table.table-hover.row(align='center')
+      tbody
+        each post, i in posts
+          if post.email == emailc
+            if post.likes != null
+              -havepost = 1
+              -var l = post.likes.length
+              -var c = 0
+              -while (c < l)
+                tr
+                  th(scope='row', style='white-space:nowrap; width:1%;')
+                    each user in users
+                        if user.email == post.email
+                          if user.gender == "female"
+                            img.img-circle(src='https://s-media-cache-ak0.pinimg.com/236x/b3/e1/97/b3e19765b8e71866d2e11e765ac0469a.jpg', width='60', height='60', align='left')
+                          else if user.gender == "male"
+                            img.img-circle(src='http://s5.favim.com/orig/69/adorable-cute-dog-photography-Favim.com-659715.jpg', width='60', height='60', align='left')
+                          else
+                            img.img-circle(src='http://www.acuteaday.com/blog/wp-content/uploads/2013/04/adorable-baby-elephant-spraying-water-out-of-trunk.jpg', width='60', height='60', align='left')
+                  td
+                    a.button.btn.pull-right.btn-warning(type='button', href='/deny?email=#{post.likes[c]}') Deny
+                    a.button.btn.pull-right.btn-success(type='button', href='/accept?email=#{post.likes[c]}') Accept
+                    each user in users
+                      if user.email == post.likes[c]
+                        a(href='/5?email=#{user.email}', style='font-size:20px') #{user.fname} #{user.lname}
+                        p is interested in your post
+                -c++
+        if havepost == 0
+          h3 You do not have any notifications

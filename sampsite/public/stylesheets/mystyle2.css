@@ -1,0 +1,119 @@
+*{
+	font-family: Verdana, Arial, sans-serif;
+	text-align: center;
+}
+
+body{
+	text-align: center;
+	background-color: #B8D9FF;
+	background-size: cover;
+}
+
+.backgroundi{
+	background: url('/images/IMG_9867.JPG') center center;
+}
+
+h1 {
+	color: #AE55F2;
+	font-size: 82px;
+}
+form {
+	font-size: 20px;
+}
+select{
+	font-size: 20px;
+}
+
+/*Makes submit buttons big & pretty */
+#submit {
+	border: none;
+	font-size: 25px;
+	width: 150px;
+	height: 50px;
+	border-radius: 18%;
+	background-color: #AE55F2;
+	color: white;
+}
+
+.panel{
+	overflow: hidden;
+	background-color: #D4C3E0;
+}
+
+
+.navbar-custom{
+	background-color: #3B7BC4;
+}
+
+.navbar-brand{
+	color: black;
+}
+
+a{
+	color: black;
+}
+
+.activen{
+	background-color: #3266A1;
+}
+
+.search1{
+	border: none;
+	height: 35px;
+	width: 150px;
+	color:  #403F3F;
+	font-size: 13px;
+	margin: -10px;
+}
+
+.search2{
+	width: 800px;
+}
+
+/* centers an element on page, adjustible */
+.center{
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.b1{
+	margin-right: 180px;
+}
+
+.b2{
+	margin-right: 15px;
+}
+
+.box {
+	border: none;
+	font-size: 18px;
+	width: 300px;
+	height: 32px;
+	border-radius: 10%;
+}
+
+.black{
+	color: black;
+}
+
+.small{
+	font-size: 13px;
+}
+
+.table>tbody>tr:nth-child(odd)>td, 
+.table>tbody>tr:nth-child(odd)>th {
+   background-color: #9fcbff;
+ }
+
+.table>tbody>tr>td, 
+.table>tbody>tr>th, 
+.table>tfoot>tr>td, 
+.table>tfoot>tr>th, 
+.table>thead>tr>td, 
+.table>thead>tr>th {
+	vertical-align: middle;
+}
+

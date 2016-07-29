@@ -1,0 +1,175 @@
+extends layout
+block content
+    // Creates navbar
+    nav.navbar.navbar-custom.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          a.navbar-brand.black(href='#')
+            b SimBiss
+        ul.nav.navbar-nav
+          li
+            a(href='/1')
+              img(src='/images/glyphicons-28-search.png')
+          li
+            a(href='/2')
+              img(src='/images/glyphicons-21-home.png')
+          li
+            a(href='/3')
+              img(src='/images/glyphicons-31-pencil.png')
+          li
+            a(href='/4')
+              img(src='/images/glyphicons-246-chat.png')
+          li.active.activen
+            a(href='/5')
+              img(src='/images/glyphicons-4-user.png')
+        ul.nav.navbar-nav.navbar-right()
+          if email1 == emailc
+            li
+              a(href='/editp') Edit
+          li
+            a(href='./') Log Out
+         
+    br
+    br
+    br
+    // Title
+    .container
+      .page-header
+          each user, i in users
+            if user.email == email1
+              h1 #{user.fname} #{user.lname}
+      br
+      br
+      // Sets up tab menu
+      ul.nav.nav-tabs
+        li.active
+          a(data-toggle='tab', href='#home') Bio
+        li
+          a(data-toggle='tab', href='#menu1') Posts
+        li
+          a(data-toggle='tab', href='#menu2') Contact
+        li
+          a(data-toggle='tab', href='#menu3') Reviews
+      // Bio page with picture
+      .tab-content
+        #home.tab-pane.fade.in.active
+          h3 Bio
+          each user, i in users
+            if user.email == email1
+              if user.gender == "female"
+                img.img-circle(src='https://s-media-cache-ak0.pinimg.com/236x/b3/e1/97/b3e19765b8e71866d2e11e765ac0469a.jpg', width='400', height='400', align='right', style='padding:5px')
+              else if user.gender == "male"
+                img.img-circle(src='http://s5.favim.com/orig/69/adorable-cute-dog-photography-Favim.com-659715.jpg', width='400', height='400', align='right', style='padding:5px')
+              else
+                img.img-circle(src='http://www.acuteaday.com/blog/wp-content/uploads/2013/04/adorable-baby-elephant-spraying-water-out-of-trunk.jpg', width='400', height='400', align='right', style='padding:5px')
+          each user, i in users
+            if user.email == email1
+              p #{user.bio}
+        // Posts page with sample post
+        #menu1.tab-pane.fade
+          h3 Posts
+          -var j = 0;
+          each post, i in posts
+            if post.email == email1
+              -j++;
+              .container
+                .panel.panel-default(text-align='left')
+                  .panel-body(align='left')
+                    each user in users
+                      if user.email == email1
+                        if user.gender == "female"
+                            img.img-circle(src='https://s-media-cache-ak0.pinimg.com/236x/b3/e1/97/b3e19765b8e71866d2e11e765ac0469a.jpg', width='100', height='100', align='left')
+                        else if user.gender == "male"
+                          img.img-circle(src='http://s5.favim.com/orig/69/adorable-cute-dog-photography-Favim.com-659715.jpg', width='100', height='100', align='left')
+                        else
+                          img.img-circle(src='http://www.acuteaday.com/blog/wp-content/uploads/2013/04/adorable-baby-elephant-spraying-water-out-of-trunk.jpg', width='100', height='100', align='left')
+                    p
+                      b Title:
+                      |  #{post.title}
+                      br
+                      b Description:
+                      |  #{post.description}
+                      br
+                      br
+                      b Location:
+                      |  #{post.loc}
+                      br
+                      b People Needed:
+                      |  #{post.pnum}
+                      br
+                      br
+                      -var loop = 0
+                      -if(post.accepted != null )
+                        b Accepted:
+                        -while(loop < post.accepted.length)
+                          each user in users
+                            if user.email == post.accepted[loop]
+                              a.black(href='/5?email=#{user.email}')
+                                p #{user.fname} #{user.lname}
+                          -loop++
+                      each user in users
+                        if user.email == post.email
+                          span.pull-left #{user.fname} #{user.lname}
+                  .panel-footer
+                    b Looking for:
+                    |  #{post.lookingfor} 
+                    if email1 == emailc
+                      a.button.btn.pull-right(type='button', href='/delpost?post=#{post._id}')
+                          img(src='/images/glyphicons-208-remove.png')
+                    else
+                      a.button.btn.pull-right(type='button', href='/like?post=#{post._id}')
+                        img(src='/images/glyphicons-13-heart.png')
+          if j == 0
+            br
+            h4 No posts yet 
+            if email1 == emailc
+              p (click on the pencil icon to create a post)
+
+        // Skills page
+        #menu2.tab-pane.fade
+          h3 Contact
+          br
+          b Email: 
+          h4 #{email1}
+        // Reviews page with star rating and comments (linkage to commenters accounts)
+        #menu3.tab-pane.fade
+          h3 Reviews
+          br
+          each user, i in users
+            if user.email == email1
+              if email1 != emailc
+                  a.button.btn(type='button', href='/rate?email=#{email1}')
+                    | Review #{user.fname}
+              else
+                b Ask previous partners and colleagues to rate you on your profile
+          br
+          br
+         
+          -var rating = 0
+          -var c2 = 0
+          each user, i in users
+            if user.email == email1
+              if user.reviews != null
+                h4 Rating:
+                -var c1 = 1
+                each review, j in user.reviews
+                  -rating = (rating + parseInt(user.reviews[c1-1].rate)) /c1
+                  -c1++
+                -while (c2 < rating )
+                  img(src='/images/glyphicons-50-star.png')
+                  -c2 ++
+                -while(c2 < 5)
+                  img(src='/images/glyphicons-49-star-empty.png')
+                  -c2++
+                br
+                br
+                -var c3 = 0
+                each review, j in user.reviews
+                  each user2, k in users
+                    if user2.email == user.reviews[c3].writer
+                      a.black(href='/5?email=#{user.reviews[0].writer}') #{user2.fname} #{user2.lname}:
+                      p #{user.reviews[c3].comment}
+                  -c3 ++
+              else
+                h4 #{user.fname} does not have any reviews
+
